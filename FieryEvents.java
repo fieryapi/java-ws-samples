@@ -148,7 +148,6 @@ public class FieryEvents {
 
     public static void main(String[] args) throws IOException,
             InterruptedException {
-                /*
         // Set the HostName as Fiery Name or IpAddress.
         final String hostname = "https://{{HOST_NAME}}";
 
@@ -160,21 +159,7 @@ public class FieryEvents {
 
         // Set the API Key for to access Fiery APIs.
         final String apikey = "{{API_KEY_STRING}}";
-        */
-        
-        
-        // Set the HostName as Fiery Name or IpAddress.
-        final String hostname = "10.3.60.222";
 
-        // Set the Username to login to the host fiery.
-        final String username = "admin";
-
-        // Set the Password to login to the fiery.
-        final String password = "Fiery.1";
-
-        // Set the API Key for to access Fiery APIs.
-        final String apikey = "hscPvGULGj8dNgLUVGdObw2+TuFt6gEmDYNQ92mGPASxlInlXXVHiyDrnNCJg239+W5K6ow++Yr9tn3p+sJdCKEtDO8/rrT26QWrUXmzbswH1DmwrADnpMdXCSw0ZNBrrmHAtfUN0ARDd8trWCmk+9QvrLSfeqTPqGmyrdCk2idtZEl1C/o6B5mRQzeUNqUVdI0vBOVaPULW0QW1tT+MQN6JMDgXZRJm8lC4+HqXAr13vo8pQy/TbY9XaNCyZOMyUqxGftSWGHRzsZa3RL5lFMGtUufkqPpaP7w22dFYmiYkXI0vtYn7VsUr+5r/y7M0MVnw5GiqDwAJ0ce9QIbjHQ==";
-        
         String jsonPayloadforLogin = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\",\"accessrights\":\"" + apikey + "\"}";
 
         // Initialize the Session Cookie to null. This cookie is used to make
