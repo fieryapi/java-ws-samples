@@ -127,6 +127,10 @@ public class FieryEvents {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         in.readLine();
+
+        // Remove filter
+        JsonRpc20.Filter removeFilter = new JsonRpc20.Filter(4, new JsonRpc20.Params("job", "remove", new JsonRpc20.AttributesStrArray(attr)));
+        ws.send(JsonWriter.objectToJson(removeFilter, GetExtraArgs()));
     }
 
     // Set filters in batch mode to receive only job is printing? events
@@ -153,6 +157,10 @@ public class FieryEvents {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         in.readLine();
+
+        // Remove filter
+        JsonRpc20.Filter removeFilter = new JsonRpc20.Filter(4, new JsonRpc20.Params("job", "remove", new JsonRpc20.AttributesStrArray(attr)));
+        ws.send(JsonWriter.objectToJson(removeFilter, GetExtraArgs()));
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
