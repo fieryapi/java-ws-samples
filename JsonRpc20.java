@@ -10,13 +10,23 @@ public class JsonRpc20 {
         this.id = id;
     }
 
+    public static class Attr {
+    }
+
+    public static class AttributesStrArray extends Attr {
+        String[] attributes;
+        AttributesStrArray(String[] attributes) {
+            this.attributes = attributes;
+        }
+    }
+
     public static class Params {
 
         String eventKind;
         String mode;
-        String[] attr;
+        Attr attr;
 
-        Params(String eventKind, String mode, String[] attr) {
+        Params(String eventKind, String mode, Attr attr) {
             this.eventKind = eventKind;
             this.mode = mode;
             this.attr = attr;

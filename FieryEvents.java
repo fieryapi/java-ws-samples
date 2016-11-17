@@ -13,6 +13,8 @@ import java.security.cert.X509Certificate;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
+import java.util.Map;
+import java.util.HashMap;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -75,6 +77,13 @@ public class FieryEvents {
         }
     }
 
+    private static Map<String, Object> GetExtraArgs() {
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put(JsonWriter.TYPE, false);
+
+        return args;
+    }
+
     // Set filters to receive only fiery status change events
     private static void ReceiveFieryStatusChangeEvents() throws IOException {
         System.out.println();
@@ -112,9 +121,9 @@ public class FieryEvents {
         ws.send(JsonWriter.objectToJson(receiveJobEvents));
 
         // Receive job events only if they contain <is printing?> key in the <attributes> key
-        String[] attributes = {"is printing?"};
-        JsonRpc20.Filter receiveIsPrintingEvents = new JsonRpc20.Filter(3, new JsonRpc20.Params("job", "add", attributes));
-        ws.send(JsonWriter.objectToJson(receiveIsPrintingEvents));
+        String[] attr = {"is printing?"};
+        JsonRpc20.Filter receiveIsPrintingEvents = new JsonRpc20.Filter(3, new JsonRpc20.Params("job", "add", new JsonRpc20.AttributesStrArray(attr)));
+        ws.send(JsonWriter.objectToJson(receiveIsPrintingEvents, GetExtraArgs()));
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         in.readLine();
@@ -135,19 +144,18 @@ public class FieryEvents {
         JsonRpc20.Command receiveJobEvents = new JsonRpc20.Command("receive", 2, receiveParams);
 
         // Receive job events only if they contain <is printing?> key in the <attributes> key
-        String[] attributes = {"is printing?"};
-        JsonRpc20.Filter receiveIsPrintingEvents = new JsonRpc20.Filter(3, new JsonRpc20.Params("job", "add", attributes));
+        String[] attr = {"is printing?"};
+        JsonRpc20.Filter receiveIsPrintingEvents = new JsonRpc20.Filter(3, new JsonRpc20.Params("job", "add", new JsonRpc20.AttributesStrArray(attr)));
 
         // Send all three commands in batch mode
         Object[] ReceiveJobIsPrintingEventsBatchMode = {ignoreAllEventsExceptJob, receiveJobEvents, receiveIsPrintingEvents};
-        ws.send(JsonWriter.objectToJson(ReceiveJobIsPrintingEventsBatchMode));
+        ws.send(JsonWriter.objectToJson(ReceiveJobIsPrintingEventsBatchMode, GetExtraArgs()));
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         in.readLine();
     }
 
-    public static void main(String[] args) throws IOException,
-            InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         // Set the HostName as Fiery Name or IpAddress.
         final String hostname = "https://{{HOST_NAME}}";
 
