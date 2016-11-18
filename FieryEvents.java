@@ -201,7 +201,7 @@ public class FieryEvents {
         try {
 
             // Connect to the Fiery API Login URL using HttpURL Connection.
-            connection = (HttpURLConnection) new URL("https://" + hostname + "/live/api/v2/login")
+            connection = (HttpURLConnection) new URL("https://" + hostname + "/live/api/v3/login")
                     .openConnection();
 
             // Set the HTTP Request Call type as POST.
@@ -280,7 +280,7 @@ public class FieryEvents {
             try {
 
                 // set fiery websocket server address
-                URI serverAddress = new URI("wss://" + hostname + "/live/api/v2/events");
+                URI serverAddress = new URI("wss://" + hostname + "/live/api/v3/events");
 
                 // establish websocket connection
                 client.start();
@@ -307,7 +307,7 @@ public class FieryEvents {
             }
 
             // Logout.
-            connection = (HttpURLConnection) new URL("https://" + hostname + "/live/api/v2/logout").openConnection();
+            connection = (HttpURLConnection) new URL("https://" + hostname + "/live/api/v3/logout").openConnection();
 
             //Set the Request method as GET
             connection.setRequestMethod("GET");
